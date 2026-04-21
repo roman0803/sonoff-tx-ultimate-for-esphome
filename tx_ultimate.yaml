@@ -435,15 +435,20 @@ light:
           speed: 10
           width: 20
 
-media_player:
+speaker:
   - platform: i2s_audio
-    id: media_out
-    name: ${friendly_name} Player
+    id: tx_speaker
     dac_type: external
     i2s_dout_pin: ${audio_sdata_pin}
     i2s_audio_id: audio_i2s
-    i2s_comm_fmt: lsb
-    mode: mono
+    i2s_mode: primary
+
+media_player:
+  - platform: speaker
+    id: media_out
+    name: ${friendly_name} Player
+    announcement_pipeline:
+      speaker: tx_speaker
 
 i2s_audio:
   id: audio_i2s
